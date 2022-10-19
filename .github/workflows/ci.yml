@@ -19,13 +19,13 @@ jobs:
     - name: gethash
       run: git_hash=${GITHUB_SHA::6} && echo $git_hash
     - name: addNightlyHash
-      run: plutil -replace nightlyHash -string "${GITHUB_SHA::7}" /Users/runner/work/LeetDown/LeetDown/LeetDown_M/com.rA9.LeetDownPreferences.plist
+      run: plutil -replace nightlyHash -string "${GITHUB_SHA::7}" /Users/barisc/actions-runner/_work/LeetDown/LeetDown/LeetDown_M/com.rA9.LeetDownPreferences.plist
     - name: cleanup
       run: rm -rf __MACOSX/ build
     - name: pod install
       run: pod install
     - name: build
-      run: xcodebuild -workspace LeetDown.xcworkspace -scheme LeetDown_M CONFIGURATION_BUILD_DIR=/Users/runner/work/LeetDown/LeetDown
+      run: xcodebuild -workspace LeetDown.xcworkspace -scheme LeetDown_M CONFIGURATION_BUILD_DIR=/Users/barisc/actions-runner/_work/LeetDown/LeetDown
     - name: envdetails2
       run: ls && echo && pwd
     - name: install create-dmg
@@ -37,7 +37,7 @@ jobs:
       uses: actions/upload-artifact@v2
       with:
         name: "LeetDown-Nightly"
-        path: /Users/runner/work/LeetDown/LeetDown/LD_Nightly_*.dmg
+        path: /Users/barisc/actions-runner/_work/LeetDown/LeetDown/LD_Nightly_*.dmg
     - name: upload nightly changes
       id: u_changes
       uses: actions/upload-artifact@v2
@@ -51,4 +51,4 @@ jobs:
       uses: actions/upload-artifact@v2
       with:
         name: "sha512"
-        path: /Users/runner/work/LeetDown/LeetDown/sha512_*
+        path: /Users/barisc/actions-runner/_work/LeetDown/LeetDown/sha512_*
