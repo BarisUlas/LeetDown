@@ -9,7 +9,7 @@ on:
 jobs:
 
   build-macOS-x86_64:
-    runs-on: macos-12
+    runs-on: self-hosted
     steps:
     - name: envdetails
       run: ls && echo && pwd
