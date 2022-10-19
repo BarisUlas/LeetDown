@@ -9,46 +9,7 @@ on:
 jobs:
 
   build-macOS-x86_64:
-    runs-on: self-hosted
+    runs-on: macos-12
     steps:
     - name: envdetails
-      run: ls && echo && pwd
-    - uses: actions/checkout@v2
-    - name: envdetails
-      run: ls && echo && pwd
-    - name: gethash
-      run: git_hash=${GITHUB_SHA::6} && echo $git_hash
-    - name: addNightlyHash
-      run: plutil -replace nightlyHash -string "${GITHUB_SHA::7}" /Users/barisc/actions-runner/_work/LeetDown/LeetDown/LeetDown_M/com.rA9.LeetDownPreferences.plist
-    - name: cleanup
-      run: rm -rf __MACOSX/ build
-    - name: pod install
-      run: pod install
-    - name: build
-      run: xcodebuild -workspace LeetDown.xcworkspace -scheme LeetDown_M CONFIGURATION_BUILD_DIR=/Users/barisc/actions-runner/_work/LeetDown/LeetDown
-    - name: envdetails2
-      run: ls && echo && pwd
-    - name: install create-dmg
-      run: brew install create-dmg
-    - name: create nightly dmg
-      run: create-dmg --window-size 430 270 --app-drop-link 300 0 --icon LeetDown.app 100 0 "LD_Nightly_${GITHUB_SHA::7}.dmg" LeetDown.app
-    - name: upload_LD
-      id: upload_LD
-      uses: actions/upload-artifact@v2
-      with:
-        name: "LeetDown-Nightly"
-        path: /Users/barisc/actions-runner/_work/LeetDown/LeetDown/LD_Nightly_*.dmg
-    - name: upload nightly changes
-      id: u_changes
-      uses: actions/upload-artifact@v2
-      with:
-        name: "Nightly Changelog"
-        path: /Users/runner/work/LeetDown/LeetDown/nightly_changes.txt
-    - name: create_shasum
-      run: sha512=$(shasum -a 512 LD_Nightly_* | cut -d ' ' -f 1) && touch "sha512_${sha512}"
-    - name: upload_SHA512
-      id: u_sha512
-      uses: actions/upload-artifact@v2
-      with:
-        name: "sha512"
-        path: /Users/barisc/actions-runner/_work/LeetDown/LeetDown/sha512_*
+      run: brew install neofetch && neofetch --off --color_blocks off --stdout
